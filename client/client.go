@@ -14,7 +14,7 @@ func read(conn *net.Conn) {
 		msg, _ := reader.ReadString('\n')
 		fmt.Printf(msg)
 	}
-	//TODO In a continuous loop, read a message from the server and display it.
+	//In a continuous loop, read a message from the server and display it.
 }
 
 func write(conn *net.Conn) {
@@ -23,7 +23,7 @@ func write(conn *net.Conn) {
 		text, _ := stdin.ReadString('\n')
 		fmt.Fprintln(*conn, text)
 	}
-	//TODO Continually get input from the user and send messages to the server.
+	//Continually get input from the user and send messages to the server.
 }
 
 func main() {
@@ -34,9 +34,9 @@ func main() {
 	go read(&conn)
 	go write(&conn)
 	for {
-
+		//Interesting quirk of golang requires this for
 	}
-	//TODO Try to connect to the server
-	//TODO Start asynchronously reading and displaying messages
-	//TODO Start getting and sending user messages.
+	//Connect to the server
+	//Start asynchronously reading and displaying messages
+	//Start getting and sending user messages.
 }

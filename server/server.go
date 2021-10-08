@@ -25,13 +25,11 @@ func acceptConns(ln net.Listener, conns chan net.Conn) {
 		conns <- conn
 
 	}
-	// TODO: all
 	// Continuously accept a network connection from the Listener
 	// and add it to the channel for handling connections.
 }
 
 func handleClient(client net.Conn, clientid int, msgs chan Message) {
-
 	for {
 		reader := bufio.NewReader(client)
 		msg, _ := reader.ReadString('\n')
@@ -39,7 +37,6 @@ func handleClient(client net.Conn, clientid int, msgs chan Message) {
 		newMessage := Message{sender: clientid, message: message}
 		msgs <- newMessage
 	}
-	// TODO: all
 	// So long as this connection is alive:
 	// Read in new messages as delimited by '\n's
 	// Tidy up each message and add it to the messages channel,
@@ -52,7 +49,7 @@ func main() {
 	portPtr := flag.String("port", ":8030", "port to listen on")
 	flag.Parse()
 
-	//TODO Create a Listener for TCP connections on the port given above.
+	//Creates a Listener for TCP connections on the port given above.
 	ln, _ := net.Listen("tcp", *portPtr)
 	//Create a channel for connections
 	conns := make(chan net.Conn)
@@ -71,8 +68,6 @@ func main() {
 			clients[i] = conn
 			go handleClient(conn, i, msgs)
 			i++
-
-			//TODO Deal with a new connection
 			// - assign a client ID
 			// - add the client to the clients channel
 			// - start to asynchronously handle messages from this client
@@ -82,7 +77,6 @@ func main() {
 					fmt.Fprint(clients[j], msg.message)
 				}
 			}
-			//TODO Deal with a new message
 			// Send the message to all clients that aren't the sender
 		}
 	}
